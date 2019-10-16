@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import ThemeContext from "./ThemeContext";
 
 import "./styles.css";
 
@@ -38,11 +39,20 @@ function App() {
   // Ca change juste le couleur de la typo ...
   const [theme, setTheme] = useState("light");
 
+  const contextValue = {
+    theme: theme, // on peut aussi ecrit theme,
+    updateTheme: setTheme
+  };
+
   return (
-    <div className={theme}>
-      <ToolBar theme={theme} updateTheme={setTheme} />
-      <p>Theme utilisé : {theme}</p>
-    </div>
+    // POSITIONER LE CONTEXT
+    // DONNER UN VALEUR A CE CONTEXT
+    <ThemeContext.Provider value={contextValue}>
+      <div className={theme}>
+        <ToolBar theme={theme} updateTheme={setTheme} />
+        <p>Theme utilisé : {theme}</p>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
