@@ -8,19 +8,17 @@ import "./styles.css";
 // Il reçoit dans ses props le thème et la fonction qui permet de le changer
 function ThemeChoice(props) {
   // Consommer le context
-  const contextValue = useContext(ThemeContext);
+  // const contextValue = useContext(ThemeContext);
+
+  const { theme, updateTheme } = useContext(ThemeContext);
 
   const handleChange = event => {
     const value = event.currentTarget.value;
-    contextValue.updateTheme(value);
+    updateTheme(value);
   };
 
   return (
-    <select
-      name="theme"
-      defaultValue={contextValue.theme}
-      onChange={handleChange}
-    >
+    <select name="theme" defaultValue={theme} onChange={handleChange}>
       <option value="dark">Sombre</option>
       <option value="light">Clair</option>
     </select>
@@ -36,7 +34,7 @@ function ToolBar(props) {
     <div>
       <button>Zoomer</button>
       <button>Dezoomer</button>
-      <ThemeChoice theme={props.theme} updateTheme={props.updateTheme} />
+      <ThemeChoice />
     </div>
   );
 }
@@ -56,7 +54,7 @@ function App() {
     // DONNER UN VALEUR A CE CONTEXT
     <ThemeContext.Provider value={contextValue}>
       <div className={theme}>
-        <ToolBar theme={theme} updateTheme={setTheme} />
+        <ToolBar />
         <p>Theme utilisé : {theme}</p>
       </div>
     </ThemeContext.Provider>
