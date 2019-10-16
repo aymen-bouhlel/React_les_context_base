@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import ThemeContext from "./ThemeContext";
 
@@ -7,13 +7,19 @@ import "./styles.css";
 // Composant en fin de chaine
 // Il reçoit dans ses props le thème et la fonction qui permet de le changer
 function ThemeChoice(props) {
+  const contextValue = useContext(ThemeContext);
+
   const handleChange = event => {
     const value = event.currentTarget.value;
-    props.updateTheme(value);
+    contextValue.updateTheme(value);
   };
 
   return (
-    <select name="theme" defaultValue={props.theme} onChange={handleChange}>
+    <select
+      name="theme"
+      defaultValue={contextValue.theme}
+      onChange={handleChange}
+    >
       <option value="dark">Sombre</option>
       <option value="light">Clair</option>
     </select>
