@@ -7,6 +7,7 @@ import "./styles.css";
 // Composant en fin de chaine
 // Il reçoit dans ses props le thème et la fonction qui permet de le changer
 function ThemeChoice(props) {
+  // Consommer le context
   const contextValue = useContext(ThemeContext);
 
   const handleChange = event => {
